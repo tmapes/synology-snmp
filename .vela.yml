@@ -1,0 +1,39 @@
+version: "1.0"
+
+steps:
+  - name: build image dry run
+    image: docker.mapes.info/target/vela-kaniko:latest
+    parameters:
+      dry_run: true
+      repo: docker.internal.mapes.info/synology-snmp
+      tags:
+        - dry_run
+    ruleset:
+        event: [push, pull_request]
+        branch: [main]
+
+  - name: build image
+    image: docker.mapes.info/target/vela-kaniko:latest
+    secrets:
+      - source: docker_username
+        target: parameter_username
+      - source: docker_password
+        target: parameter_password
+    parameters:
+      insecure_registries:
+        - docker.internal.mapes.info
+      registry: docker.internal.mapes.info
+      repo: docker.internal.mapes.info/synology-snmp
+      mirror: docker.mapes.info
+      tags:
+        - "${VELA_BUILD_TAG:##v}"
+    ruleset:
+      event: tag
+  
+secrets:
+  - name: docker_username
+    type: org
+    key: tmapes/docker_username
+  - name: docker_password
+    type: org
+    key: tmapes/docker_password
