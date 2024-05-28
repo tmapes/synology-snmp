@@ -2,7 +2,7 @@ version: "1.0"
 
 steps:
   - name: build image dry run
-    image: target/vela-kaniko:v0.17.0
+    image: target/vela-kaniko:v0.17.0@sha256:56d8499175eb5a1b5342a86f706b87bff89878d2e5a5d835dcb9ffaa21836d19
     parameters:
       dry_run: true
       repo: docker.internal.mapes.info/synology-snmp
@@ -13,7 +13,7 @@ steps:
         branch: [main]
 
   - name: build image
-    image: target/vela-kaniko:v0.17.0
+    image: target/vela-kaniko:v0.17.0@sha256:56d8499175eb5a1b5342a86f706b87bff89878d2e5a5d835dcb9ffaa21836d19
     secrets:
       - source: docker_username
         target: parameter_username
