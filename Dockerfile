@@ -1,6 +1,6 @@
 # FROM --platform=linux/x86_64 docker.mapes.info/telegraf:1.21.4
 # Downgrading until https://github.com/influxdata/telegraf/issues/10554 is fixed
-FROM --platform=linux/x86_64 docker.mapes.info/telegraf:1.31.0@sha256:a3fd9bde5d28301f27e87ec8ff8389365c788526cf22f19493ca6c02561be819
+FROM --platform=linux/x86_64 docker.mapes.info/telegraf:1.31.1@sha256:2001083db32d1bbfb936809df9f2c69c688fa1623d7f991a6c1f93f99ae350fb
 
 COPY ./mibs /usr/share/snmp/mibs
 
